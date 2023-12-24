@@ -1,0 +1,42 @@
+{% extends 'usuarios/register.html' %}
+
+{% block title %}
+    Modificar Comentario
+{% endblock title %}
+
+{% block contenido %}
+<form method="POST">
+    {% csrf_token %}
+    <div  class="form-group mb-3 caja-centro">
+        <label for="comentario" class="form-label boton-modificar">Modificar comentario</label>
+        <textarea class="form-control" id="comentario" name="texto" rows="5" placeholder="Modifica tu comentario aquí" required>{{ com.texto }}</textarea>        
+        <button type="submit" class="btn btn-success boton-modificar">Confirmar</button>
+    </div>
+</form>
+
+
+<!-- <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card bg-light">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Modificar Comentario</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ form.as_p }}
+                        </div>
+                        <button type="submit" class="btn btn-success">Confirmar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+{% endblock contenido %}
+
+
+
+

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+    
+{% block title %}
+    Posteos
+{% endblock title %}
+
+{% block filtro %}
+<li><a href="{% url 'posts:Inicio' %}" class="nav-link px-2 text-white">Regresar</a></li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Filtro
+  </a>
+  <ul class="dropdown-menu"> 
+    <li>Categoria</li>
+    {% for categoria in categorias %}
+    <li><a class="dropdown-item" href="?id={{categoria.pk}}">{{categoria.nombre}}</a></li>
+    {% endfor %}            
+    <li><hr class="dropdown-divider">Fecha</li>
+    <li><a class="dropdown-item" href="?orden=desc">Más recientes</a></li>   
+    <li><a class="dropdown-item" href="?orden=asc">Más antiguos</a></li>     
+    <li><hr class="dropdown-divider">Letra</li>
+    <li><a class="dropdown-item" href="?orden=a">A-Z</a></li>    
+    <li><a class="dropdown-item" href="?orden=z">Z-A</a></li>    
+  </ul>
+</li>
+{% endblock filtro %}
+
+{% block contenido %}
+
+
+<br>
+<div class="container text-center">
+  <div class="row">
+    {% for post in posteos %}
+      <div class="col-3">
+        <div class="card text-bg-dark mb-3" style="max-width: 540px;">
+          <div class="card-img-container">
+            <img src="{{ post.imagen.url }}" class="card-img" alt="No Hay Imagen">
+            <div class="card-body description-hidden">
+              <h2 class="card-title">{{ post.titulo }}</h2>
+              <p class="card-text">{{ post.subtitulo }}</p>
+            </div>
+          </div>
+          <div class="card-footer text-center" style="background-color: black; color: white;">
+            <ul class="list-group list-group-flush" style="background-color: black; color: white;">
+              <li class="list-group-item" style="background-color: black; color: white;">Publicado: {{ post.fecha }}</li>
+              <li class="list-group-item" style="background-color: black; color: white;">{{ post.categoria }}</li>
+            </ul>
+            <a href="{% url 'posts:post_detail' post.id %}" class="btn btn-primary mt-2">Ver Post</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+    <h1>No Hay Posts</h1>
+    {% endfor %}   
+  </div>
+</div>
+
+
+<style>
+  .card-img-container {
+    position: relative;
+  }
+
+  .card-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .card-img-container:hover .card-body {
+    opacity: 1;
+  }
+</style>
+{% endblock contenido %}

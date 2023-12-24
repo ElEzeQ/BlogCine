@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="icon" href="{% static 'img/icono.ico' %}">
+
+  <title>
+	{% block title %}
+	Registro
+	{% endblock title %}
+  </title>
+
+</head>
+
+<body>
+<a href="{% url 'posts:Inicio' %}" class="boton-back btn btn-primary text-white">Regresar</a>
+{% block contenido %}
+<div class="text-white register-box">
+	<h1>Registro</h1>
+	<form method="POST">
+		{% csrf_token %}
+		<label for="{{ form.username.id_for_label }}">Nombre de usuario:</label>
+		{{ form.username }}
+		{{ form.username.errors }}
+		<label for="{{ form.username.id_for_label }}">Email:</label>
+		{{ form.email }}
+		{{ form.email.errors }}
+		<label for="{{ form.username.id_for_label }}">Contraseña:</label>
+		{{ form.password1 }} 
+		{{ form.password1.errors }}
+		<label for="{{ form.username.id_for_label }}">Confirmar Contraseña:</label>
+		{{ form.password2 }} 
+		{{ form.password2.errors }}
+		<input type="submit" id="submit" value="Registrarse" class="btn btn-primary">
+	</form>
+</div>
+{% endblock contenido %}
+</body>
+</html>
+

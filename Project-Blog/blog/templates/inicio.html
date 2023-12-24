@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Cine de culto
+{% endblock title %}
+
+{% block contenido %}
+<div class="text-white">
+  <h2>¡No podes no verlas!</h2>
+  <p>
+    Si sos una persona que no consume cine y no tenés idea sobre qué ver, ¡esta página es la indicada!<br> Te traemos un catálogo de grandes películas de esta época para que te pongas al día y puedas comenzar a hablar con tus amigos sobre el <b>cine de culto.</b> <br>
+  </p>
+
+<hr>
+<h1> Tendencias</h1>
+</div>
+<br>
+<div class="container text-center">
+  <div class="row">
+    {% for post in trending %}
+    <div class="col">
+      <div class="card text-bg-dark mb-3" style="max-width: 540px;">
+        <div class="card-img-container">
+          <img src="{{ post.imagen.url }}" class="card-img" alt="No Hay Imagen">
+          <div class="card-body description-hidden">
+            <h5 class="card-title">{{ post.titulo }}</h5>
+            <p class="card-text">{{ post.subtitulo }}</p>
+          </div>
+        </div>
+        <div class="card-footer text-center" style="background-color: black; color: white;">
+          <ul class="list-group list-group-flush" style="background-color: black; color: white;">
+            <li class="list-group-item" style="background-color: black; color: white;">Publicado: {{ post.fecha }}</li>
+            <li class="list-group-item" style="background-color: black; color: white;">{{ post.categoria }}</li>
+          </ul>
+          <a href="{% url 'posts:post_detail' post.id %}" class="btn btn-primary mt-2">Ver Post</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .card-img-container {
+    position: relative;
+  }
+
+  .card-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .card-img-container:hover .card-body {
+    opacity: 1;
+  }
+</style>
+<div class="contenedor-post">
+<a href="{% url 'posts:posts' %}" class= "text-white" >Ver más posts</a>
+</div>
+{% endblock contenido %}
